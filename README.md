@@ -5,6 +5,8 @@
 
 ## Example config:
 
+File is config.json
+
 ```json
 {
     "nerimity": {
