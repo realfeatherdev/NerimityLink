@@ -58,13 +58,16 @@ nerimityBot.on(nerimity.Events.MessageCreate, async (message) => {
         const repliedPreview = stripOldReplyHeader(replyingMessage.content);
         content = `\n> @${replyingMessage.user.username}: ${repliedPreview}\n${content}`;
     }
-    webhook.execute({
-        content: `${content}`,
-        avatarURL: `${`https://cdn.nerimity.com/${message.user.avatar}` ??
-            "https://github.com/FeatherUtils/feather/blob/master/pack_icon.png?raw=true"
-            }`,
-        username: `${message.user.username}`,
-    });
+
+    try {
+        webhook.execute({
+            content: `${content}`,
+            avatarURL: `${`https://cdn.nerimity.com/${message.user.avatar}` ??
+                "https://github.com/FeatherUtils/feather/blob/master/pack_icon.png?raw=true"
+                }`,
+            username: `${message.user.username}`,
+        });
+    } catch { }
 });
 
 discordBot.on("messageCreate", async (message) => {
@@ -82,7 +85,9 @@ discordBot.on("messageCreate", async (message) => {
         "https://github.com/FeatherUtils/feather/blob/master/pack_icon.png?raw=true"
         }`
     );
-    nerimityWebhook.send(content);
+    try {
+        nerimityWebhook.send(content);
+    } catch { }
 });
 
 discordBot.on("error", (err) => {
