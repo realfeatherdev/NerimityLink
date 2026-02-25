@@ -85,7 +85,10 @@ discordBot.on("messageCreate", async (message) => {
         "https://github.com/FeatherUtils/feather/blob/master/pack_icon.png?raw=true"
         }`
     );
-    if(!content) content = '[Attachment]';
+    for(const attachment of message.attachments) {
+        if(content) content = content + `\n${attachment.url}`
+        if(!content) content = attachment.url
+    }
     try {
         nerimityWebhook.send(content);
     } catch { }
