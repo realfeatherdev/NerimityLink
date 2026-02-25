@@ -58,7 +58,7 @@ nerimityBot.on(nerimity.Events.MessageCreate, async (message) => {
         const repliedPreview = stripOldReplyHeader(replyingMessage.content);
         content = `\n> @${replyingMessage.user.username}: ${repliedPreview}\n${content}`;
     }
-
+    if(!content) content = '[Attachment]'
     try {
         webhook.execute({
             content: `${content}`,
@@ -85,6 +85,7 @@ discordBot.on("messageCreate", async (message) => {
         "https://github.com/FeatherUtils/feather/blob/master/pack_icon.png?raw=true"
         }`
     );
+    if(!content) content = '[Attachment]';
     try {
         nerimityWebhook.send(content);
     } catch { }
